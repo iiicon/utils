@@ -81,12 +81,14 @@
 
   // leading：false 表示禁用第一次执行
   // trailing: false 表示禁用停止触发的回调
+
+  // 注意 leading：false 和 trailing: false 不能同时设置。
   function throttle(func, wait, options) {
     var timer;
     var previous = 0;
     options = options || {};
 
-    return function () {
+    return function throttled() {
       var context = this;
       var args = arguments;
       if (!previous && options.leading === false) previous = now;
@@ -111,4 +113,10 @@
       }
     };
   }
+
+  throttled.cancel = function () {
+    clearTimeout(timeout);
+    previous = 0;
+    timeout = null;
+  };
 }
