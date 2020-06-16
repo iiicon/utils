@@ -22,4 +22,8 @@ sort order
 - _.isEqual(value, other) // deep comparision 和 underscore 的 eq 功能相同
 
 - _.isEqualWith(value, other, [customizer]) // invoked customizer to compare values
+
+_.curry(func, [arity=func.length]) // _作为默认的placeholder，arity返回的函数有几层
+
+_.curryRight(func, [arity=func.length]) // 参数从最后一个往前执行，感觉也挺有用的
 ```
