@@ -26,4 +26,8 @@ sort order
 _.curry(func, [arity=func.length]) // _作为默认的placeholder，arity返回的函数有几层
 
 _.curryRight(func, [arity=func.length]) // 参数从最后一个往前执行，感觉也挺有用的
+
+_.partial(func, [partials]) // return partially applied function
+
+_.partialRight(func, [partials]) // 参数从最后一个开始传
 ```
