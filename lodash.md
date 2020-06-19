@@ -31,3 +31,14 @@ _.partial(func, [partials]) // return partially applied function
 
 _.partialRight(func, [partials]) // 参数从最后一个开始传
 ```
+
+
+## Function
+
+```
+_.after(func, n) 返回一个函数fn, 在fn被调用n次后，执行 func
+
+_.ary(func, n) 创建一个函数fn，执行 func，忽略长度大于n的参数
+
+_.before(func, n) 创建一个函数fn, fn调用n次之前可以执行 func，否则返回最后一次执行 func 的结果
+```
