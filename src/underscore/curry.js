@@ -9,13 +9,14 @@ function curry(fn, args) {
       i;
 
     for (i = 0; i < arguments.length; i++) {
-      _args.push(arg[i]);
+      arg = arguments[i];
+      _args.push(arg);
     }
 
     if (_args.length < length) {
       return curry.call(this, fn, _args);
     } else {
-      return curry.apply(this, _args);
+      return fn.apply(this, _args);
     }
   };
 }
