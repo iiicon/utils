@@ -67,3 +67,10 @@ _.memoize(func, [resolver]) create a function that memoizes the result of func
 
 _.flip(func) create a function that invokes func with arguments reversed
 ```
+
+## seq
+
+```js
+_.chain()  // 构造函数方法，需要用 value 解析
+_.prototype.chain() // 实例方法，需要用 value 解析
+```
