@@ -66,6 +66,15 @@ _.before(func, n) 创建一个函数fn, fn调用n次之前可以执行 func，�
 _.memoize(func, [resolver]) create a function that memoizes the result of func
 
 _.flip(func) create a function that invokes func with arguments reversed
+
+_.property(path) create a function that returns the value at path of given object
+eg: var objects = [{ 'a': { 'b': 2 } },{ 'a': { 'b': 1 } }]; _.map(objects, _.property('a.b'));
+
+_.matches(source) create a function that performs a deep comparision between two object, return has equitvalte object,else return false 
+eg: _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
+
+_.matchesProperty(path, srcValue)
+eg: _.find(objects, _.matchesProperty('a', 4));4
 ```
 
 ## seq
