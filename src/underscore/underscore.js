@@ -19,15 +19,52 @@
     root._ = _;
   }
 
+  _.VERSION = "8.8";
+
+  var MAX_ARRAY_INDEX = Math.pow(2, 53) - 1;
+
+  var isArrayLike = function (collection) {
+    var length = collection.length;
+    return (
+      typeof length == "number" && length >= 0 && length <= MAX_ARRAY_INDEX
+    );
+  };
+
+  _.each = function (obj, callback) {
+    var length,
+      i = 0;
+
+    if (isArrayLike(obj)) {
+      length = obj.length;
+      for (; i < length; i++) {
+        if (callback.call(obj[i], obj[i], i) === false) {
+          break;
+        }
+      }
+    } else {
+      for (i in obj) {
+        if (callback.call(obj[i], obj[i], i) === false) {
+          break;
+        }
+      }
+    }
+
+    return obj;
+  };
+
   _.log = function () {
     console.log(this);
+  };
+
+  _.isFunction = function (obj) {
+    return typeof obj == "function" || false;
   };
 
   // functions
   _.functions = function (obj) {
     var names = [];
     for (var key in obj) {
-      if (_isFunction(obj(key))) names.push(key);
+      if (_.isFunction(obj[key])) names.push(key);
     }
     return names.sort();
   };
@@ -35,12 +72,15 @@
   // mixin
   var ArrayProto = Array.prototype;
   var push = ArrayProto.push;
+
   _.mixin = function (obj) {
-    _each(_.functions(obj), function (name) {
+    _.each(_.functions(obj), function (name) {
       var func = (_[name] = obj[name]);
       _.prototype[name] = function () {
         var args = [this._wrapped];
+
         push.apply(args, arguments);
+
         return func.apply(_, args);
       };
     });
@@ -49,35 +89,8 @@
   };
 
   _.mixin(_);
-
-  function _isFunction(obj) {
-    return typeof obj === "function";
-  }
-
-  function _each(obj, callback) {
-    var length,
-      i = 0;
-
-    if (isArrayLike(obj)) {
-      length = obj.length;
-      for (; i < length; i++) {
-        if (callback.call(obj[i], i, obj[i]) === false) {
-          break;
-        }
-      }
-    } else {
-      for (i in obj) {
-        if (callback.call(obj[i], i, obj[i]) === false) {
-          break;
-        }
-      }
-    }
-
-    return obj;
-  }
 })();
 
-console.log(root);
-_().log();
+const _ = module.exports;
 
-// console.log(_)
+_().log();
