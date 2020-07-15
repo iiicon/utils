@@ -69,6 +69,17 @@
     return names.sort();
   };
 
+  // underscore 默认不支持链式调用，如果要链式调用需要用chain函数
+  _.chain = function (obj) {
+    var instance = _(obj);
+    instance._chain = true;
+    return instance;
+  };
+
+  var chainResult = function (instance, obj) {
+    return instance._chain ? _(obj).chain() : obj;
+  };
+
   // mixin
   var ArrayProto = Array.prototype;
   var push = ArrayProto.push;
@@ -81,7 +92,7 @@
 
         push.apply(args, arguments);
 
-        return func.apply(_, args);
+        return chainResult(this, func.apply(_, args));
       };
     });
 
