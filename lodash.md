@@ -15,8 +15,6 @@ _.sortedIndex(array, value) // use binary search to inserted into array in order
 sort order
 _.sortedIndexBy(array, value, [iteratee=_.identity]) search by invoked value
 
-_.identity(value) // return first element
-
 _.eq(value, other) // 基础的一些判断，和 underscore 不同
 
 _.isEqual(value, other) // deep comparision 和 underscore 的 eq 功能相同
@@ -67,16 +65,27 @@ _.memoize(func, [resolver]) create a function that memoizes the result of func
 
 _.flip(func) create a function that invokes func with arguments reversed
 
-_.property(path) create a function that returns the value at path of given object
-eg: var objects = [{ 'a': { 'b': 2 } },{ 'a': { 'b': 1 } }]; _.map(objects, _.property('a.b'));
-
 _.matches(source) create a function that performs a deep comparision between two object, return has equitvalte object,else return false 
 eg: _.filter(objects, _.matches({ 'a': 4, 'c': 6 }));
 
 _.matchesProperty(path, srcValue)
 eg: _.find(objects, _.matchesProperty('a', 4));4
-```
 
+_.identity(value) // return first element
+
+_.noop() // returns undefined
+
+_.constant(value) // creates a function that returns value
+
+_.property(path) create a function that returns the value at path of given object
+eg: var objects = [{ 'a': { 'b': 2 } },{ 'a': { 'b': 1 } }]; _.map(objects, _.property('a.b'));
+
+_.propertyOf(obj) create a function that returns the value at a given path of object
+// _.map([['a', '2'], ['c', '0']], _.propertyOf(object));
+// => [2, 0]
+
+
+```
 ## seq
 
 ```js
